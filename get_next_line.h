@@ -8,5 +8,6 @@ char *alloc_buff(size_t size);
 char *get_next_line(int fd); 
 char *word_copy(char *str, size_t size);
 char	*ft_strchr(const char *STRING, int C);
+size_t	ft_strlen(const char *S);
 
 #endif

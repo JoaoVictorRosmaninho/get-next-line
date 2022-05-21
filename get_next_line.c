@@ -10,10 +10,10 @@ char *read_lines(char *buffer) {
 	char *pos_char;
 	static int fixed_position = 0;
 	
-	pos_char = ft_strchr(buffer + fixed_position + 1, '\n');
-	if (!pos_char) 
-		return (NULL);
-	fixed_position = (int) (buffer - pos_char);
+	pos_char = ft_strchr(buffer + fixed_position, '\n');
+	if (!pos_char && (ft_strlen(buffer) > 0))
+		pos_char = ft_strchr(buffer, '\0');
+	fixed_position = (int) (pos_char - buffer);
 	return (word_copy(buffer, fixed_position));
 	
 }
