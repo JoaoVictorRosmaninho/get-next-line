@@ -6,10 +6,14 @@
 char	*alloc_buff(size_t size) 
 {
 	char *ptr;
+        size_t index;
 
-	ptr = (char *) malloc(sizeof(char) * size	);
+	ptr = (char *) malloc(sizeof(char) * size);
+        index = 0;
 	if (!ptr)
 		return (NULL);
+        while (index < size)
+          ptr[index++] = '\0';
 	return (ptr);
 }
 

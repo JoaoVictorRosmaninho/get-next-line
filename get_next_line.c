@@ -40,7 +40,7 @@ char *get_next_line(int fd)
 
 	if (!buffer)
           buffer = alloc_buff(BUFFER_SIZE + 1);
-	if (read(fd, buffer, BUFFER_SIZE) > 0)
+	if (ft_strlen(buffer) < 1 && read(fd, buffer, BUFFER_SIZE) > 0)
 	{
 		buffer[BUFFER_SIZE] = '\0';
 		return (read_lines(&buffer));
