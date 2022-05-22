@@ -55,3 +55,22 @@ char *word_copy(char *str, size_t size)
 	word_part[index] = '\0';
 	return (word_part);
 }
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t			i;
+	unsigned char	*dest_uc;
+	unsigned char	*src_uc;
+
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	dest_uc = (unsigned char *)dest;
+	src_uc = (unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		dest_uc[i] = src_uc[i];
+		i++;
+	}
+	return (dest);
+}
