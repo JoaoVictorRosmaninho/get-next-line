@@ -34,11 +34,11 @@ void test_word_part(void) {
 /* expect return each line of the file */
 void test_get_next_line(void) 
 {
-    int fd = open("nomes.txt", O_RDONLY);
+    int fd = open("./nomes.txt", O_RDONLY);
     char *str; 
     while ((str = get_next_line(fd)) != NULL)
     {
-        puts(str);
+        printf(str);
         free(str);
     }
     puts("get-next-line: OK");
@@ -47,6 +47,6 @@ void test_get_next_line(void)
 int main(void) {
     
    // get_next_line(fd);
-   test_word_part();
+   //test_word_part();
    test_get_next_line();
 }

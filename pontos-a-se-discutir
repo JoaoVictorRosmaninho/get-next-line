@@ -1,0 +1,18 @@
+#Pontos a se discutir
+ * retirar o conteúdo copiado através do memcpy
+ * usar o buffer ou o rest ?
+ * se utilizar o rest, como fazer o split
+
+ * se o buffer for igual a null então não tem \n no buffer passado, 
+   logo basta fazer um join com o rest 
+   se não 
+   há um ou mais \n no buffer que devem ser iterados até o buffer ser igual a null
+
+
+# Como estou dando free no buffer, no segundo loop ele nao entra
+  1 solucao: tirar o free, mas pq eu coloquei la ?
+
+
+* como mostrar que li um \n ?
+ 1 solução: passar uma flag, 0 => nao leu, 1 => leu 
+ 2 solução: 

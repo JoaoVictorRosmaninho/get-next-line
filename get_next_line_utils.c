@@ -2,18 +2,19 @@
 #include <stddef.h>
 
 
-
-char	*alloc_buff(size_t size) 
+void	*ft_calloc(size_t COUNT, size_t ELTSIZE)
 {
-	char *ptr;
-        size_t index;
+	void	*ptr;
+	int i;
 
-	ptr = (char *) malloc(sizeof(char) * size);
-        index = 0;
+	ptr = malloc(COUNT * ELTSIZE);
 	if (!ptr)
 		return (NULL);
-        while (index < size)
-          ptr[index++] = '\0';
+	i = 0;
+	while (i < (COUNT * ELTSIZE)) {
+		*(unsigned char * )(ptr + i) = 0;
+		i++;
+	}
 	return (ptr);
 }
 
@@ -25,6 +26,26 @@ size_t	ft_strlen(const char *S)
 	while (S[size])
 		size++;
 	return (size);
+}
+
+static size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	src_size;
+	size_t	dst_size;
+	size_t	i;
+
+	src_size = ft_strlen(src);
+	dst_size = ft_strlen(dst);
+	i = 0;
+	if (size <= dst_size)
+		return (size + src_size);
+	while (src[i] && ((i + dst_size) < (size - 1)))
+	{
+		dst[dst_size + i] = src[i];
+		i++;
+	}
+	dst[dst_size + i] = '\0';
+	return (src_size + dst_size);
 }
 
 char	*ft_strchr(const char *STRING, int C)
@@ -78,3 +99,35 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	size;
+	char	*new_str;
+
+	if (!s1 || !s2)
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	new_str = (char *) ft_calloc(size, 1);
+	if (!new_str)
+		return (NULL);
+	ft_strlcat(new_str, s1, size);
+	ft_strlcat(new_str, s2, size);
+	return (new_str);
+}
+
+char	*ft_strdup(const char *str)
+{
+	size_t		size_buffer;
+	char		*new_str;
+
+	size_buffer = ft_strlen(str) + 1;
+	new_str = (char *) malloc(size_buffer);
+	if (!new_str)
+		return (NULL);
+	ft_memcpy(new_str, str, size_buffer);
+	return (new_str);
+}
+
+
+
+
