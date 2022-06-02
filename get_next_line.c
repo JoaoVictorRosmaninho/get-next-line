@@ -6,7 +6,24 @@
 */
 
 
-char *read_lines(char **buffer, char *f) {
+static void dump_line(char **rest, char *content) 
+{
+	char *ptr_aux; 
+
+	if (!*rest) 
+		*rest = content;
+	else
+	{
+		ptr_aux = *rest;
+		*rest = ft_strjoin(*rest, content);
+		free(ptr_aux);
+	}
+
+}
+
+
+
+static char *read_lines(char **buffer, char *f) {
 	char *pos_char;
 	int fixed_position;
 	int size;
@@ -53,18 +70,11 @@ char *get_next_line(int fd)
 			buffer[BUFFER_SIZE] = '\0';
 			ptr_aux_a = read_lines(&buffer, &flag);
 		}
-		if (!rest)
-			rest = ptr_aux_a; 
-		else
-		{   
-			ptr_aux_b = rest; 
-			rest = ft_strjoin(rest, ptr_aux_a);
-			free(ptr_aux_a);
-			free(ptr_aux_b);
-		}
+		dump_line(&rest, ptr_aux_a);
 		if (!flag)
 			return rest; 
 	}
 	free(buffer);
-	return NULL;
+	buffer = NULL;
+	return rest;
 }
