@@ -28,26 +28,6 @@ size_t	ft_strlen(const char *S)
 	return (size);
 }
 
-static size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	src_size;
-	size_t	dst_size;
-	size_t	i;
-
-	src_size = ft_strlen(src);
-	dst_size = ft_strlen(dst);
-	i = 0;
-	if (size <= dst_size)
-		return (size + src_size);
-	while (src[i] && ((i + dst_size) < (size - 1)))
-	{
-		dst[dst_size + i] = src[i];
-		i++;
-	}
-	dst[dst_size + i] = '\0';
-	return (src_size + dst_size);
-}
-
 char	*ft_strchr(const char *STRING, int C)
 {
 	size_t	index;
@@ -103,16 +83,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	size;
 	char	*new_str;
+        size_t  size_a;
+        size_t  size_b;
 
 	if (!s1 || !s2)
 		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+
+	size_a = ft_strlen(s1); 
+        size_b = ft_strlen(s2); 
+        size = size_a + size_b + 1;
 	new_str = (char *) ft_calloc(size, 1);
 	if (!new_str)
 		return (NULL);
-	ft_strlcat(new_str, s1, size);
-	ft_strlcat(new_str, s2, size);
-	return (new_str);
+	ft_memcpy(new_str, s1, size_a); 
+	ft_memcpy(new_str + size_a, s2, size_b); 
+	new_str[size] = '\0'; 
+        return (new_str);
 }
 
 char	*ft_strdup(const char *str)

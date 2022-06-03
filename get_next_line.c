@@ -47,34 +47,46 @@ static char *read_lines(char **buffer, char *f) {
 	 return (tmp);
 }
 
-char *get_next_line(int fd) 
+char *get_word(char **rest, char *buffer, int fd)
 {
-	static char *buffer = NULL;
-	char *rest;
-	char flag;
-	char *ptr_aux_a;
-	char *ptr_aux_b;
+  char *content;
+  char flag;
 
-	if (!buffer)
-		buffer = (char *) ft_calloc(BUFFER_SIZE + 1, 1);
-	rest = NULL;
-	flag = 1;
+  flag = 0;
 	while (1)
 	{
 		if (ft_strlen(buffer) > 0)
-			 ptr_aux_a = read_lines(&buffer, &flag);
-		else 
+			 content = read_lines(&buffer, &flag);
+                else 
 		{
 			if (read(fd, buffer, BUFFER_SIZE) < 1)
 				break ;
 			buffer[BUFFER_SIZE] = '\0';
-			ptr_aux_a = read_lines(&buffer, &flag);
+			content = read_lines(&buffer, &flag);
 		}
-		dump_line(&rest, ptr_aux_a);
+		dump_line(rest, content);
 		if (!flag)
-			return rest; 
+                  return *rest; 
 	}
-	free(buffer);
-	buffer = NULL;
-	return rest;
+
+}
+
+
+char *get_next_line(int fd) 
+{
+	static char *buffer = NULL;
+	char *rest;
+	
+        if (!buffer)
+		buffer = (char *) ft_calloc(BUFFER_SIZE + 1, 1);
+	rest = NULL;
+        get_word(&rest, buffer, fd); 
+        if (!rest)
+          return rest;
+        if (!ft_strlen(buffer) > 0)
+        {
+	  free(buffer);
+	  buffer = NULL;
+        }
+	return (rest);
 }
