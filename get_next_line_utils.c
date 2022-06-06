@@ -44,23 +44,6 @@ char	*ft_strchr(const char *STRING, int C)
 	return (NULL);
 }
 
-char *word_copy(char *str, size_t size) 
-{
-	char *word_part;
-	int index;
-
-	if (size < 0 || size > ft_strlen(str))
-		return (NULL);
-	if (size == 0)
-		size = ft_strlen(str);
-	index = 0;
-	word_part = (char *) malloc(size + 1);
-	while (*str && index < size)
-		word_part[index++] = *str++;
-	word_part[index] = '\0';
-	return (word_part);
-}
-
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			i;
@@ -101,18 +84,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
         return (new_str);
 }
 
-char	*ft_strdup(const char *str)
-{
-	size_t		size_buffer;
-	char		*new_str;
-
-	size_buffer = ft_strlen(str) + 1;
-	new_str = (char *) malloc(size_buffer);
-	if (!new_str)
-		return (NULL);
-	ft_memcpy(new_str, str, size_buffer);
-	return (new_str);
-}
 
 
 
