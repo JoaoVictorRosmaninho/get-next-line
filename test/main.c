@@ -10,27 +10,6 @@ void show_message(char *msg)
     exit(0);
 }
 
-/* expect return part of the string finishing with\n */
-void test_word_part(void) {
-    char *tmp = word_copy("joao victor", 4);
-    if (strcmp(tmp, "joao") != 0)
-        show_message("Error in word_part");
-    free(tmp);
-    tmp = word_copy("abc", 3);
-    if (strcmp(tmp, "abc") != 0)
-        show_message("Error in word_part");
-    free(tmp);
-    tmp = word_copy("abc", 30);
-    if (tmp != NULL)
-        show_message("Error in word_part");
-    tmp = word_copy("abc", -30);
-    if (tmp != NULL)
-        show_message("Error in word_part");
-    tmp = word_copy("abc", 0);
-    if (strcmp(tmp, "abc") != 0)
-        show_message("Error in word_part");
-    puts("word_part: OK");
-}
 /* expect return each line of the file */
 void test_get_next_line(void) 
 {
@@ -38,10 +17,9 @@ void test_get_next_line(void)
     char *str; 
     while ((str = get_next_line(fd)) != NULL)
     {         
-         printf("%s\n", str);
+         printf("%s", str);
          free(str);
     }
-    puts("get-next-line: OK");
 }
 
 int main(void) {

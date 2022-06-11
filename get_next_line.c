@@ -12,7 +12,7 @@
 
 #include "./get_next_line.h"
 
-static void	dump_line(char **rest, char *content)
+static char *dump_line(char **rest, char *content)
 {
 	char	*ptr_aux;
 
@@ -24,6 +24,7 @@ static void	dump_line(char **rest, char *content)
 		*rest = ft_strjoin(*rest, content);
 		free(ptr_aux);
 	}
+	return (*rest);
 }
 
 char	*ft_strdup(const char *str)
@@ -56,10 +57,10 @@ static char	*read_lines(char **buffer, char *f)
 			ft_memcpy(*buffer, "\0", BUFFER_SIZE);
 			return (tmp);
 		}
-		*f = 0;
+		*f = 1;
 		length = (int)(pos_char - *buffer);
 		tmp = (char *)ft_calloc(length + 1, 1);
-		ft_memcpy(tmp, buffer, length);
+		ft_memcpy(tmp, *buffer, length);
 		tmp[length] = '\0';
 		ft_memcpy(*buffer, (*buffer + length + 1), size - length + 1);
 	}
@@ -78,14 +79,17 @@ static char	*get_word(char **rest, char *buffer, int fd)
 			content = read_lines(&buffer, &flag);
 		else
 		{
-			if (read(fd, buffer, BUFFER_SIZE) < 1)
-				break ;
+			if (read(fd, buffer, BUFFER_SIZE) < 1) 
+				break;
 			buffer[BUFFER_SIZE] = '\0';
 			content = read_lines(&buffer, &flag);
 		}
 		dump_line(rest, content);
-		if (!flag)
+		if (flag) 
+		{
+			dump_line(rest, "\n");
 			return (*rest);
+		}
 	}
 }
 
