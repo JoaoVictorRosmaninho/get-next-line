@@ -12,7 +12,7 @@
 
 #include "./get_next_line.h"
 
-static char *dump_line(char **rest, char *content)
+static char	*dump_line(char **rest, char *content)
 {
 	char	*ptr_aux;
 
@@ -79,13 +79,13 @@ static char	*get_word(char **rest, char *buffer, int fd)
 			content = read_lines(&buffer, &flag);
 		else
 		{
-			if (read(fd, buffer, BUFFER_SIZE) < 1) 
-				break;
+			if (read(fd, buffer, BUFFER_SIZE) < 1)
+				break ;
 			buffer[BUFFER_SIZE] = '\0';
 			content = read_lines(&buffer, &flag);
 		}
 		dump_line(rest, content);
-		if (flag) 
+		if (flag)
 		{
 			dump_line(rest, "\n");
 			return (*rest);
