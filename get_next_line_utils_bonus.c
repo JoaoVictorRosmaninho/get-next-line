@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jv <jv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/11 15:53:09 by jv                #+#    #+#             */
-/*   Updated: 2022/06/11 19:56:24 by jv               ###   ########.fr       */
+/*   Created: 2022/06/11 17:25:11 by jv                #+#    #+#             */
+/*   Updated: 2022/06/11 17:25:14 by jv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	size_a = ft_strlen(s1);
-	size_b = ft_strlen(s2);
-	size = size_a + size_b + 1;
+		size_b = ft_strlen(s2);
+		size = size_a + size_b + 1;
 	new_str = (char *) ft_calloc(size, 1);
 	if (!new_str)
 		return (NULL);

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jv <jv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/05 22:12:42 by jv                #+#    #+#             */
-/*   Updated: 2022/06/11 22:17:54 by jv               ###   ########.fr       */
+/*   Created: 2022/06/11 17:25:21 by jv                #+#    #+#             */
+/*   Updated: 2022/06/11 22:16:05 by jv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./get_next_line.h"
-#include <string.h>
+#include "./get_next_line_bonus.h"
 
 static char	*dump_line(char **rest, char *content)
 {
@@ -63,8 +62,8 @@ static char	*read_lines(char **buffer, char *f)
 		*f = 1;
 		length = (int)(pos_char - *buffer);
 		tmp = (char *)ft_calloc(length + 1, 1);
-		ft_memcpy(tmp, *buffer, (length + 1));
-		tmp[length + 1] = '\0';
+		ft_memcpy(tmp, *buffer, length);
+		tmp[length] = '\0';
 		ft_memcpy(*buffer, (*buffer + length + 1), size - length + 1);
 	}
 	return (tmp);
@@ -96,18 +95,20 @@ static char	*get_word(char **rest, char *buffer, int fd)
 char	*get_next_line(int fd)
 {
 	static char	*buffer = NULL;
-	char		*rest;
+	char		*rest[MAX_FD];
+	int			pos;
 
 	if (!buffer)
 		buffer = (char *) ft_calloc(BUFFER_SIZE + 1, 1);
-	rest = NULL;
-	get_word(&rest, buffer, fd);
-	if (!rest)
-		return (rest);
-	if (!ft_strlen(buffer) > 0)
+	pos = fd % (MAX_FD - 1);
+	rest[pos] = NULL;
+	get_word((rest + pos), buffer, fd);
+	if (!rest[pos])
+		return (rest[pos]);
+	if (!(ft_strlen(buffer) > 0))
 	{
 		free(buffer);
 		buffer = NULL;
 	}
-	return (rest);
+	return (rest[pos]);
 }
