@@ -6,16 +6,17 @@
 /*   By: jv <jv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 15:53:09 by jv                #+#    #+#             */
-/*   Updated: 2022/06/11 19:56:24 by jv               ###   ########.fr       */
+/*   Updated: 2022/06/11 22:35:11 by jv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./get_next_line.h"
+#include <stddef.h>
 
 void	*ft_calloc(size_t COUNT, size_t ELTSIZE)
 {
 	void	*ptr;
-	int		i;
+	size_t	i;
 
 	ptr = malloc(COUNT * ELTSIZE);
 	if (!ptr)

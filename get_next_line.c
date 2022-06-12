@@ -6,7 +6,7 @@
 /*   By: jv <jv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 22:12:42 by jv                #+#    #+#             */
-/*   Updated: 2022/06/11 22:17:54 by jv               ###   ########.fr       */
+/*   Updated: 2022/06/11 22:34:04 by jv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static char	*get_word(char **rest, char *buffer, int fd)
 		if (flag)
 			return (*rest);
 	}
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
@@ -104,7 +105,7 @@ char	*get_next_line(int fd)
 	get_word(&rest, buffer, fd);
 	if (!rest)
 		return (rest);
-	if (!ft_strlen(buffer) > 0)
+	if (!(ft_strlen(buffer) > 0))
 	{
 		free(buffer);
 		buffer = NULL;
