@@ -6,39 +6,40 @@
 /*   By: jv <jv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 15:53:09 by jv                #+#    #+#             */
-/*   Updated: 2022/06/11 22:35:11 by jv               ###   ########.fr       */
+/*   Updated: 2022/06/12 17:41:52 by jv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./get_next_line.h"
 #include <stddef.h>
 
-void	*ft_calloc(size_t COUNT, size_t ELTSIZE)
+void	*ft_memset(void *BLOCK, int C, size_t SIZE)
 {
-	void	*ptr;
-	size_t	i;
+	unsigned char		value;
+	size_t				index;
 
-	ptr = malloc(COUNT * ELTSIZE);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (i < (COUNT * ELTSIZE))
+	value = (unsigned char) C;
+	index = 0;
+	while (index < SIZE)
 	{
-		*(unsigned char *)(ptr + i) = 0;
-		i++;
+		*(((unsigned char *) BLOCK) + index) = value;
+		index++;
 	}
-	return (ptr);
+	return (BLOCK);
 }
 
 size_t	ft_strlen(const char *S)
 {
-	size_t	size;
+	char *tmp = NULL;
 
-	size = 0;
-	while (S[size])
-		size++;
-	return (size);
+    if (!S)
+		return (0);
+	tmp = (char*) S;
+	while (*tmp)
+		tmp++;
+	return ((size_t) (tmp - S));
 }
+
 
 char	*ft_strchr(const char *STRING, int C)
 {
@@ -87,11 +88,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_a = ft_strlen(s1);
 	size_b = ft_strlen(s2);
 	size = size_a + size_b + 1;
-	new_str = (char *) ft_calloc(size, 1);
+	new_str = (char *) malloc(size);
+	ft_memset(new_str, 0, size);
 	if (!new_str)
 		return (NULL);
 	ft_memcpy(new_str, s1, size_a);
 	ft_memcpy(new_str + size_a, s2, size_b);
-	new_str[size] = '\0';
 	return (new_str);
 }

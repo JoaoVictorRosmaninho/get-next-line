@@ -6,7 +6,7 @@
 /*   By: jv <jv@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 15:56:39 by jv                #+#    #+#             */
-/*   Updated: 2022/06/11 17:24:42 by jv               ###   ########.fr       */
+/*   Updated: 2022/06/12 11:27:20 by jv               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_calloc(size_t COUNT, size_t ELTSIZE);
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *STRING, int C);
 size_t	ft_strlen(const char *S);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memset(void *BLOCK, int C, size_t SIZE);
 char	*ft_strdup(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 
