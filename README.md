@@ -1,4 +1,4 @@
-<h1 align="center">42 libft</h1>  
+<h1 align="center">42 get_next_line</h1>  
 
 > My Second project at [42 São Paulo](https://www.42sp.org.br/), where i need to write a bufferd file reader. the problem is to read a line of size N 
 > into a buffer of size M without memory leak and data loss.
